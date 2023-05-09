@@ -6,6 +6,13 @@ const title = document.createElement('p')
 title.id = 'title'
 title.textContent = 'Форма бронирования'
 
+//Уведомления
+const popup = document.createElement('div')
+popup.id = 'popup'
+const titleData = document.createElement('p')
+titleData.id = 'title-data'
+popup.append(titleData)
+
 
 //БАШНИ
 const towers = document.createElement('div')
@@ -59,6 +66,7 @@ for (let i = 1; i <= MEETING_ROOMS_COUNT; i++) {
 const inputChooseDay = document.createElement('input')
 inputChooseDay.className = 'choose__day'
 inputChooseDay.placeholder = 'Выберите день'
+
 const titleChooseStart = document.createElement('p')
 titleChooseStart.textContent = 'Время начала'
 
@@ -108,9 +116,10 @@ const textareaComment = document.createElement('textarea')
 textareaComment.className = 'comment'
 textareaComment.placeholder = 'Введите комментарий'
 
-const buttonOpen = document.createElement('button')
-buttonOpen.className = 'btn__open'
 
+//Смайлики
+const buttonOpenSmiles = document.createElement('button')
+buttonOpenSmiles.className = 'btn__open'
 
 const divOpenSmiles = document.createElement('div')
 divOpenSmiles.className = 'open__smiles'
@@ -130,8 +139,9 @@ for (let i = 0; i < emojies.length; i++) {
     })
 }
 
-
+//открыть/закрыть смайлики
 let count = 0
+
 function showSmiles() {
     count++
     if (count % 2 === 1) {
@@ -141,8 +151,9 @@ function showSmiles() {
     }
 }
 
-buttonOpen.addEventListener('click', showSmiles)
-comment.append(textareaComment, buttonOpen, divOpenSmiles)
+buttonOpenSmiles.addEventListener('click', showSmiles)
+comment.append(textareaComment, buttonOpenSmiles, divOpenSmiles)
+
 
 //Кнопки отправки и очистки
 const buttons = document.createElement('div')
@@ -155,11 +166,16 @@ buttonCleanAll.classList.add('btn', 'btn__clean')
 buttonCleanAll.textContent = 'Очистить'
 buttons.append(buttonCleanAll, buttonSend)
 
+
 const allSelects = [selectTowers, selectFloors, selectMeetingRooms]
 const allTimesInputs = [inputChooseDay, inputChooseStart, inputChooseFinish]
 
 
 buttonSend.addEventListener('click', () => {
+    popup.className = 'show'
+    setTimeout(function () {
+        popup.className = popup.className.replace("show", "");
+    }, 5000);
     const data = {
         tower: selectTowers.options[selectTowers.selectedIndex].value,
         floor: selectFloors.options[selectFloors.selectedIndex].value,
@@ -187,9 +203,16 @@ buttonSend.addEventListener('click', () => {
     })
 
     if (selectTowers.selectedIndex !== 0 && selectFloors.selectedIndex !== 0 && selectMeetingRooms.selectedIndex !== 0 && inputChooseDay.value !== '' && inputChooseStart.value !== '' && inputChooseFinish.value !== '' && !(inputChooseStart.value > inputChooseFinish.value)) {
+        titleData.textContent = 'Форма успешно отправлена'
+        popup.classList.add('right__data__popup')
         console.log(JSON.stringify(data))
     } else if (inputChooseStart.value > inputChooseFinish.value) {
+        titleData.textContent = 'Время начала больше чем время окончания'
+        popup.classList.add('invalid__data__popup')
         inputChooseStart.className = inputChooseFinish.className = 'invalid__data'
+    } else {
+        titleData.textContent = 'Выберите все значения'
+        popup.classList.add('invalid__data__popup')
     }
 
 })
@@ -201,8 +224,14 @@ buttonCleanAll.addEventListener('click', () => {
     selectFloors.selectedIndex = selectTowers.selectedIndex = selectMeetingRooms.selectedIndex = 0
     inputChooseStart.value = ''
     inputChooseFinish.value = ''
-})
 
+    allSelects.forEach(element => {
+        element.classList.remove('invalid__data')
+    })
+    allTimesInputs.forEach(element => {
+        element.classList.remove('invalid__data')
+    })
+})
 
 towers.append(selectTowers)
 floors.append(selectFloors)
@@ -210,5 +239,5 @@ meetingRooms.append(selectMeetingRooms)
 
 form.append(title, towers, floors, meetingRooms, allTimes, comment, buttons)
 
-main.append(form)
+main.append(form, popup)
 

@@ -53,7 +53,7 @@ body{
     font-weight: 400;
     font-family: Tahoma, Geneva, sans-serif;
 }
-select,.choose__day,option{
+select,.choose__day{
     display: block;
     line-height: 2;
     width: 95%;
@@ -74,6 +74,32 @@ select,.choose__day,option{
     font-size: 16px;
     background: transparent;
 }
+textarea,.datepicker,input{
+    display: block;
+    line-height: 2;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
+}
+input{
+    display: block;
+    line-height: 2;
+    width: 90%;
+    max-width: 90%;
+    box-sizing: border-box;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
+}
+textarea{
+    width: 95%;
+    max-width: 95%;
+}
 select {
     letter-spacing: inherit;
     word-spacing: inherit;
@@ -85,7 +111,7 @@ select:hover,.choose__day:hover{
 .btn__send,.btn__clean{
     border: none;
 }
-#title,.modal__data {
+#title,#title-data {
     text-align: center;
     font-weight: 400;
     font-size: 16px;
@@ -93,30 +119,6 @@ select:hover,.choose__day:hover{
 }
 .invalid__data{
     border: 3px solid red;
-}
-.modal{
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top:0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-.modal__content{
-    background-color: white;
-    margin:10% auto;
-    padding: 20px;
-    border: 2px solid black;
-    width: 150px;
-    height: 100px;
-    position: relative;
-    border-radius: 20px;
-}
-.modal__data{
-    position: relative;
-    top:35%;
 }
 p,input{
     margin-left: 11px;
@@ -130,37 +132,35 @@ p{
 input::placeholder{
     opacity: 1;
 }
-input{
-    width: 200px;
-}
 textarea::placeholder,input::placeholder {
     font-weight: 400;
     font-size: 16px;
     font-family: Tahoma, Geneva, sans-serif;
 }
 textarea{
-    margin-top: 25px;
+    margin-top: 20px;
     margin-left: 10px;
-    width: 470px;
     border-radius: 6px;
     resize: none;
 }
 .hours{
     display: flex;
+    position: relative;
 }
-.choose__finish__hour{
-    margin-left: 45px;
-}
-
 .choose__time{
+    width: 200px;
     border-radius: 6px;
+    max-width: 100px;
 }
 .selectMeetingRooms,.selectFloors,.selectTowers{
     size: 1px;
 }
+.choose__finish__hour{
+    position: absolute;
+    right: 16px;
+}
 .start__time{
     margin-left: 12px;
-    max-width: 80%;
 }
 @media (max-width: 768px) {
     .form {
@@ -171,31 +171,110 @@ textarea{
         height: auto;
     }
 }
-.choose__day{
-    min-width: 300px;
-}
-.btn__open{
-    position: relative;
-    bottom: 40px;
-    left: 457px;
-    cursor: pointer;
-}
 .open__smiles{
     width: 200px;
-    height: 80px;
-    border: 3px solid white;
+    height: 50px;
+    border: 3px solid black;
     text-align: center;
     border-radius: 6px;
+    position: absolute;
+    bottom:76px;
+    right: 10px;
+    background-color: white;
+    z-index: 10;
+
 }
 .btn__open{
-    margin-left: 3px;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    border: none;
     width: 25px;
     height: 25px;
     background-image: url("assets/Smile.svg");
     background-repeat: no-repeat;
-    border-radius: 10%;
+    background-color: #ffffff;
+}
+.comment,.times{
+    position: relative;
+}
+#popup{
+    visibility: hidden;
+    width: 350px;
+    height: 50px;
+    margin: auto;
+    background-color: white;
+    color: black;
+    text-align: center;
+    position: absolute;
+    left: 15px;
+    bottom:30px;
+    z-index: 10;
+    font-size: 17px;
+    white-space: nowrap;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0;
+}
+#popup.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+}
+#popup.invalid__data__popup{
+    background-color: #f56565;
+    border: 1px solid red;
+}
+#popup.right__data__popup{
+    background-color: #ffffff;
+    border: 2px solid green;
+}
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
 }
 
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes expand {
+    from {min-width: 50px}
+    to {min-width: 350px}
+}
+
+@keyframes expand {
+    from {min-width: 50px}
+    to {min-width: 350px}
+}
+@-webkit-keyframes stay {
+    from {min-width: 350px}
+    to {min-width: 350px}
+}
+
+@keyframes stay {
+    from {min-width: 350px}
+    to {min-width: 350px}
+}
+@-webkit-keyframes shrink {
+    from {min-width: 350px;}
+    to {min-width: 50px;}
+}
+
+@keyframes shrink {
+    from {min-width: 350px;}
+    to {min-width: 50px;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 60px; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 60px; opacity: 0;}
+}
 
 
 
