@@ -124,7 +124,7 @@ buttonOpenSmiles.className = 'btn__open';
 const divOpenSmiles = document.createElement('div');
 divOpenSmiles.className = 'open__smiles';
 divOpenSmiles.style.display='none';
-const emojies = ["😃", "😁", "😂", "🤣", "😟", "🙁", "🥺", "😎", "💗", "👍", "👎", "👌", "✅", "❓", "❗", "🔥"];
+const emojies = ["😃", "😁", "😂", "😟", "🙁", "🥺", "😎", "💗", "👍", "👎", "👌", "✅", "❓", "❗", "🔥"];
 
 
 for (let i = 0; i < emojies.length; i++) {
