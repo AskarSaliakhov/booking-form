@@ -123,8 +123,8 @@ buttonOpenSmiles.className = 'btn__open';
 
 const divOpenSmiles = document.createElement('div');
 divOpenSmiles.className = 'open__smiles';
-divOpenSmiles.style.display='none';
-const emojies = ["😃", "😁", "😂", "😟", "🙁", "🥺", "😎", "💗", "👍", "👎", "👌", "✅", "❓", "❗", "🔥"];
+divOpenSmiles.style.display = 'none';
+const emojies = ["😃", "😁", "😂", "🤣", "😟", "🙁", "🥺", "😎", "💗", "👍", "👎", "👌", "✅", "❓", "❗", "🔥"];
 
 
 for (let i = 0; i < emojies.length; i++) {
@@ -135,35 +135,36 @@ for (let i = 0; i < emojies.length; i++) {
     smile.addEventListener('click', () => {
         textareaComment.value = textareaComment.value.slice(0, textareaComment.selectionStart) +
             emojies[i] +
-            textareaComment.value.slice(textareaComment.selectionStart + 1, textareaComment.value.length)
+            textareaComment.value.slice(textareaComment.selectionEnd, textareaComment.value.length)
     })
 }
+
 
 
 function closeEmojies() {
     return divOpenSmiles.style.display = 'none';
 }
+
 function openEmojies() {
     return divOpenSmiles.style.display = 'block';
 }
 
 //закрыть Esc-ом
 
-document.addEventListener('keydown', function(e) {
-    if( e.keyCode === 27 ){
-        count=0;
+document.addEventListener('keydown', function (e) {
+    if (e.keyCode === 27) {
+        count = 0;
         closeEmojies();
     }
 });
 
 //открыть/закрыть смайлики
-let count=0
-buttonOpenSmiles.addEventListener('click',()=>{
+let count = 0
+buttonOpenSmiles.addEventListener('click', () => {
     count++;
-    if (count%2===1) {
+    if (count % 2 === 1) {
         openEmojies();
-    }
-    else {
+    } else {
         closeEmojies();
     }
 })
@@ -225,8 +226,7 @@ buttonSend.addEventListener('click', () => {
         inputChooseDay.value !== '' &&
         inputChooseStart.value !== '' &&
         inputChooseFinish.value !== '' &&
-        !(inputChooseStart.value > inputChooseFinish.value))
-    {
+        !(inputChooseStart.value > inputChooseFinish.value)) {
         titleData.textContent = 'Форма успешно отправлена';
         popup.classList.add('right__data__popup');
         console.log(JSON.stringify(data));
@@ -255,6 +255,8 @@ buttonCleanAll.addEventListener('click', () => {
     allTimesInputs.forEach(element => {
         element.classList.remove('invalid__data');
     })
+    closeEmojies();
+    count++;
 })
 
 towers.append(selectTowers);
