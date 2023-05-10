@@ -31,17 +31,17 @@ body{
     margin-bottom: 20px;
 }
 .btn__send{
-    margin-left: 120px;
-    background-color: #447bbb;
+    margin-left: 100px;
+    background-color:#2196f3;
     color: #ffffff;
 }
 .btn__send:hover{
     background-color: #5889c3;
 }
 .btn__clean{
-    margin-left: 70px;
+    margin-left: 100px;
     background-color: #f1f2f6;
-    color: #36647b;
+    color: #2196f3;
 }
 .btn__clean:hover{
     background-color: #e7ecf2;
@@ -54,6 +54,7 @@ body{
     font-family: Tahoma, Geneva, sans-serif;
 }
 select,.choose__day{
+    padding: 7px 40px 7px 12px;
     display: block;
     line-height: 2;
     width: 95%;
@@ -74,7 +75,7 @@ select,.choose__day{
     font-size: 16px;
     background: transparent;
 }
-textarea,.datepicker,input{
+textarea,.datepicker{
     display: block;
     line-height: 2;
     width: 100%;
@@ -85,11 +86,19 @@ textarea,.datepicker,input{
     font-size: 16px;
     background: transparent;
 }
+.choose__time{
+    display: block;
+    line-height: 2;
+    box-sizing: border-box;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
+}
+
 input{
     display: block;
     line-height: 2;
-    width: 90%;
-    max-width: 90%;
     box-sizing: border-box;
     font-family: Tahoma, Geneva, sans-serif;
     font-weight: 400;
@@ -118,10 +127,10 @@ select:hover,.choose__day:hover{
     font-family: Tahoma, Geneva, sans-serif;
 }
 .invalid__data{
-    border: 3px solid red;
+    border: 3px solid #f56565;
 }
 p,input{
-    margin-left: 11px;
+    margin-left: 13px;
     border-radius: 6px;
 }
 p{
@@ -148,16 +157,14 @@ textarea{
     position: relative;
 }
 .choose__time{
-    width: 200px;
+    width: 88%;
     border-radius: 6px;
-    max-width: 100px;
+}
+.choose__start__hour,.choose__finish__hour{
+    width: 100%;
 }
 .selectMeetingRooms,.selectFloors,.selectTowers{
     size: 1px;
-}
-.choose__finish__hour{
-    position: absolute;
-    right: 16px;
 }
 .start__time{
     margin-left: 12px;
@@ -178,16 +185,15 @@ textarea{
     text-align: center;
     border-radius: 6px;
     position: absolute;
+    left: 280px;
     bottom:76px;
-    right: 10px;
     background-color: white;
     z-index: 10;
-
 }
 .btn__open{
     position: absolute;
     top: 5px;
-    right: 20px;
+    right: 27px;
     border: none;
     width: 25px;
     height: 25px;
@@ -222,7 +228,7 @@ textarea{
 }
 #popup.invalid__data__popup{
     background-color: #f56565;
-    border: 1px solid red;
+    border: 1px solid #f56565;
 }
 #popup.right__data__popup{
     background-color: #ffffff;
@@ -275,7 +281,6 @@ textarea{
     from {bottom: 30px; opacity: 1;}
     to {bottom: 60px; opacity: 0;}
 }
-
 
 
 
